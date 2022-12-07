@@ -1,5 +1,8 @@
 from machine import Pin
-from neopixel import NeoPixel
+from strip import Strip
+import json
+
+config_path = "config/config.json"
 
 pin_neopixel = None
 max_pixel = None
@@ -22,6 +25,13 @@ max_brightness = None
 brightness = None
 speed = None
 mode = None
+
+led_strip = Strip(pin_neopixel, max_pixel)
+
+
+def read_config():
+    with open(config_path, "r") as file:
+        config = json.loads(file.read())
 
 
 def set_brightness(value: int):
